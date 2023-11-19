@@ -49,16 +49,14 @@ class Matrix {
 
     public double this[int row, int col] {
         get {
-            if (row < 0 || row > Rows || col < 0 || col > Columns)
-            {
+            if (row < 0 || row > Rows || col < 0 || col > Columns) {
                 throw new IndexOutOfRangeException("Index out of range.");
             }
 
             return matrix[row, col];
         }
         set {
-            if (row < 0 || row > Rows || col < 0 || col > Columns)
-            {
+            if (row < 0 || row > Rows || col < 0 || col > Columns) {
                 throw new IndexOutOfRangeException("Index out of range.");
             }
 
@@ -96,12 +94,51 @@ class Matrix {
 
         int m = a.Rows;
         int n = a.Columns;
-        Matrix newMatrix = new Matrix(m, n);
+        Matrix result = new Matrix(m, n);
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                newMatrix[i, j] = a[i, j] + b[i, j];
+                result[i, j] = a[i, j] + b[i, j];
             }
         }
-        return newMatrix;
+        return result;
+    }
+
+    /// <summary>
+    /// Subtract first matrix from second matrix elementwise.
+    /// </summary>
+    public static Matrix operator -(Matrix a, Matrix b) {
+        if (!CheckSameShape(a, b)) {
+            throw new Exception($"Matrix shapes ({a.Rows}, {a.Columns}) and ({b.Rows}, {b.Columns}) do not correspond.");
+        }
+
+        int m = a.Rows;
+        int n = a.Columns;
+        Matrix result = new Matrix(m, n);
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                result[i, j] = a[i, j] - b[i, j];
+            }
+        }
+        return result;
+    }
+
+    public static Matrix operator *(Matrix a, Matrix b) {
+        if (a.Columns != b.Rows) {
+            throw new Exception($"Columns of first matrix {a.Columns} not equal to Rows of second matrix {b.Rows}");
+        }
+
+        int m = a.Rows;
+        int n = b.Columns;
+
+        Matrix result = new Matrix(m, n);
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                for (int k = 0; k < a.Columns; k++) {
+                    result[i, j] += a[i, k] * b[k, j];
+                }
+            }
+        }
+
+        return result;
     }
 }
