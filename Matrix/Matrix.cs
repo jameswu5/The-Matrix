@@ -90,4 +90,16 @@ public partial class Matrix {
     /// </summary>
     public static bool CheckSameShape(Matrix a, Matrix b) => (a.Rows == b.Rows) && (a.Columns == b.Columns);
 
+    /// <summary>
+    /// Return the identity matrix.
+    /// </summary>
+    /// <param name="n">Size of the identity matrix.</param>
+    public static Matrix Identity(int n) {
+        Matrix res = new Matrix(n, n);
+        for (int i = 0; i < n; i++) {
+            res[i, i] = 1;
+        }
+        return res;
+    }
+
 }

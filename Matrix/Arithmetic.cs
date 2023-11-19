@@ -93,4 +93,34 @@ public partial class Matrix {
     public static Matrix operator /(Matrix mat, double value) => 1.0 / value * mat;
 
     public static Matrix operator /(Matrix mat, int value) => 1.0 / value * mat;
+
+    /// <summary>
+    /// Raise a square matrix to a power.
+    /// </summary>
+    public static Matrix Power(Matrix mat, int power) {
+        int m = mat.Rows;
+        int n = mat.Columns;
+        if (m != n) {
+            throw new Exception("Matrix is not square.");
+        }
+
+        if (power == 0) {
+            return Identity(n);
+        }
+
+        if (power == 1) {
+            return mat;
+        }
+
+        if ((power & 1) == 0) {
+            return Power(mat * mat, power >> 1);
+        } else {
+            return mat * Power(mat * mat, power >> 1);
+        }
+    }
+
+    public Matrix Power(int power) => Power(this, power);
+
+    public Matrix Pow(int power) => Power(this, power);
+
 }
