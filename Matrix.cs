@@ -259,4 +259,40 @@ class Matrix {
 
     public double Det() => Determinant(this);
 
+
+    public static Matrix Invert(Matrix mat) {
+        if (mat.Rows != mat.Columns) {
+            throw new Exception($"Matrix is not square: shape ({mat.Rows}, {mat.Columns})");
+        }
+
+        int n = mat.Rows;
+
+        if (n == 0) {
+            throw new Exception($"Matrix size {n} not valid.");
+        }
+
+        double determinant = mat.Det();
+
+        if (determinant == 0) {
+            throw new Exception($"Determinant is 0, cannot invert");
+        }
+
+        if (n == 1) {
+            return new Matrix(new double[,] {{1 / determinant}});
+        }
+
+        Matrix result = new Matrix(n, n);
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                double cofactor = Determinant(GetMinorMatrix(mat, j, i));
+                int sign = ((i & 1) ^ (j & 1)) == 0 ? 1 : -1;
+                result[i, j] = cofactor / determinant * sign;
+            }
+        }
+
+        return result;
+    }
+
+    public Matrix Invert() => Invert(this);
 }
