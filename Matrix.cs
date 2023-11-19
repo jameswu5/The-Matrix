@@ -8,7 +8,8 @@ using System.Text;
 class Matrix {
     public int Rows { get; private set; }
     public int Columns { get; private set; }
-    private double[,] matrix;
+    private readonly double[,] matrix;
+    private const int MaxDecimals = 3;
 
     /// <summary>
     /// Create an empty matrix with all values defaulted to 0.
@@ -71,7 +72,7 @@ class Matrix {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < Rows; i++) {
             for (int j = 0; j < Columns; j++) {
-                sb.Append(matrix[i, j]);
+                sb.Append(Math.Round(matrix[i, j], MaxDecimals));
                 sb.Append(' ');
             }
             sb.Append('\n');
@@ -165,4 +166,8 @@ class Matrix {
     public static Matrix operator *(Matrix mat, double value) => value * mat;
 
     public static Matrix operator *(Matrix mat, int value) => (double)value * mat;
+
+    public static Matrix operator /(Matrix mat, double value) => 1.0 / value * mat;
+
+    public static Matrix operator /(Matrix mat, int value) => 1.0 / value * mat;
 }
