@@ -85,6 +85,10 @@ class Matrix {
     /// </summary>
     public static bool CheckSameShape(Matrix a, Matrix b) => (a.Rows == b.Rows) && (a.Columns == b.Columns);
 
+
+
+    // MATRIX OPERATIONS
+
     /// <summary>
     /// Add two matrices together elementwise.
     /// </summary>
@@ -170,4 +174,30 @@ class Matrix {
     public static Matrix operator /(Matrix mat, double value) => 1.0 / value * mat;
 
     public static Matrix operator /(Matrix mat, int value) => 1.0 / value * mat;
+
+
+
+    // LINEAR ALGEBRA OPERATIONS
+
+
+    /// <summary>
+    /// Return a new matrix that is the transpose of the one passed.
+    /// </summary>
+    public static Matrix Transpose(Matrix mat) {
+        int m = mat.Rows;
+        int n = mat.Columns;
+        Matrix result = new Matrix(n, m);
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                result[j, i] = mat[i, j];
+            }
+        }
+        return result;
+    }
+
+    public static Matrix T(Matrix mat) => Transpose(mat);
+
+    public Matrix Transpose() => Transpose(this);
+
+    public Matrix T() => Transpose(this);
 }
