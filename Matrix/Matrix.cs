@@ -102,4 +102,20 @@ public partial class Matrix {
         return res;
     }
 
+    /// <summary>
+    /// Return a copy of the matrix.
+    /// </summary>
+    public static Matrix DeepCopy(Matrix sourceMatrix) {
+        int m = sourceMatrix.Rows;
+        int n = sourceMatrix.Columns;
+        Matrix res = new Matrix(m, n);
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                res[i, j] = sourceMatrix[i, j];
+            }
+        }
+        return res;
+    }
+
+    public Matrix DeepCopy() => DeepCopy(this);
 }

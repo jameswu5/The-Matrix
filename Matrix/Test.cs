@@ -39,7 +39,9 @@ public static class Test {
     });
 
     public static void Playground() {
-        Console.WriteLine(mat5.Invert());
+        Matrix mat10 = mat5.SwapRows(1, 0);
+        Console.WriteLine(mat10);
+        Console.WriteLine(mat5);
     }
 
 }

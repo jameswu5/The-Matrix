@@ -6,7 +6,7 @@ namespace LinearAlgebra.Matrix;
 
 public partial class Matrix {
 
-    // MATRIX OPERATIONS
+    // MATRIX ARITHMETIC
 
     /// <summary>
     /// Add two matrices together elementwise.
