@@ -32,4 +32,23 @@ public partial class Matrix {
 
     public Matrix SwapRows(int a, int b) => SwapRows(this, a, b);
 
+    /// <summary>
+    /// Multiply a row by a factor
+    /// </summary>
+    public Matrix MultiplyRow(Matrix mat, int row, double factor) {
+        if (row < 0 || row >= mat.Rows) {
+            throw new Exception($"Row index {row} out of range.");
+        }
+
+        Matrix res = mat.DeepCopy();
+
+        for (int i = 0; i < res.Columns; i++) {
+            res[row, i] *= factor;
+        }
+
+        return res;
+    }
+
+    public Matrix MultiplyRow(int row, double factor) => MultiplyRow(this, row, factor);
+
 }
