@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 
 namespace LinearAlgebra.Matrix;
 
@@ -8,8 +7,10 @@ public partial class Matrix {
 
     // ROW REDUCTION METHODS
 
+    // ELEMENTARY ROW OPERATIONS
+
     /// <summary>
-    /// Return a new matrix of the two rows swapped.
+    /// Swap two rows of the matrix.
     /// </summary>
     public static Matrix SwapRows(Matrix mat, int a, int b, bool inPlace = false) {
         int m = mat.Rows;
@@ -36,7 +37,7 @@ public partial class Matrix {
     /// <summary>
     /// Multiply a row by a factor
     /// </summary>
-    public Matrix MultiplyRow(Matrix mat, int row, double factor, bool inPlace = false) {
+    public static Matrix MultiplyRow(Matrix mat, int row, double factor, bool inPlace = false) {
         if (row < 0 || row >= mat.Rows) {
             throw new Exception($"Row index {row} out of range.");
         }
@@ -51,5 +52,29 @@ public partial class Matrix {
     }
 
     public Matrix MultiplyRow(int row, double factor, bool inPlace = false) => MultiplyRow(this, row, factor, inPlace);
+
+    // TODO
+
+    public static Matrix AddToAnotherRow(Matrix mat, int sourceRow, int destRow, double factor, bool inPlace = false) {
+        throw new NotImplementedException();
+    }
+
+    public Matrix AddToAnotherRow(int sourceRow, int destRow, double factor, bool inPlace = false) 
+               => AddToAnotherRow(this, sourceRow, destRow, factor, inPlace);
+
+    
+    // ROW REDUCTION
+
+    /// <summary>
+    /// Row reduce the matrix to echelon form
+    /// </summary>
+    public static Matrix RowReduce(Matrix mat, bool inPlace = false) {
+
+        Matrix res = inPlace ? mat : mat.DeepCopy();
+
+        throw new NotImplementedException();
+    }
+
+    public Matrix RowReduce(bool inPlace = false) => RowReduce(this, inPlace);
 
 }
