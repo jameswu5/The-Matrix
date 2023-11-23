@@ -38,11 +38,10 @@ public partial class Vector {
         }
     }
 
-
     public override string ToString() {
         StringBuilder sb = new();
         foreach (double d in vector) {
-            sb.Append(d);
+            sb.Append(Math.Round(d, MaxDecimals));
             sb.Append(' ');
         }
         return sb.ToString();
